@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Conceptos básicos &#8212; Notas ~ Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '1_introduccion';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Notas ~ Machine Learning" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Notas ~ Machine Learning
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. Conceptos básicos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conceptos básicos</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F1_introduccion.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/1_introduccion.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Conceptos básicos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones">Aplicaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-sistemas">Tipos de sistemas</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="conceptos-basicos">
+<h1>Conceptos básicos<a class="headerlink" href="#conceptos-basicos" title="Permalink to this heading">#</a></h1>
+<p>He aquí algunas definiciones de <strong>Machine Learning</strong> por varios autores.</p>
+<blockquote>
+<div><p><em>Machine learning is the science (and art) of programming computers so they can learn from data.</em></p>
+<ul class="simple">
+<li><p>Aurelien Geron</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><em>Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed.</em></p>
+<ul class="simple">
+<li><p>Arthur Samuel</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><em>A computer program is said to learn from experience <span class="math notranslate nohighlight">\(E\)</span> with respect to some task <span class="math notranslate nohighlight">\(T\)</span> and some performance measure <span class="math notranslate nohighlight">\(P\)</span>, if its performance on <span class="math notranslate nohighlight">\(T\)</span>, as measured by <span class="math notranslate nohighlight">\(P\)</span>, improves with experience <span class="math notranslate nohighlight">\(E\)</span>.</em></p>
+<ul class="simple">
+<li><p>Tom Mitchell</p></li>
+</ul>
+</div></blockquote>
+<p>Las virtudes de estos sistemas, y su diferencia respecto al paradigma de programación tradicional, radica en el <em>aprendizaje de reglas complejas</em> que no tengan que ser programadas de forma manual. Usualmente queremos sistemas que puedan cambiar con facilidad y de forma automatizada; hacer las cosas manualmente da lugar a sistemas difíciles de mantener.</p>
+<section id="aplicaciones">
+<h2>Aplicaciones<a class="headerlink" href="#aplicaciones" title="Permalink to this heading">#</a></h2>
+<p>Entre las aplicaciones más comunes de esta clase de sistemas encontramos:</p>
+<ul>
+<li><p><em>Análisis de imágenes de productos en líneas de producción:</em></p>
+<p>Redes Neuronales Convolucionales (CNNs).</p>
+</li>
+<li><p><em>Detección de tumores:</em></p>
+<p>Se emplean técnicas de segmentación de imágenes (CNNs).</p>
+</li>
+<li><p><em>Clasificación de artículos nuevos:</em></p>
+<p>Técnicas del Procesamiento del Lenguaje Natural (NLP) con Redes Neuronales Recurrentes.</p>
+</li>
+<li><p><em>Detección de comentarios ofensivos.</em></p>
+<p>Mismas técnicas que en el caso anterior.</p>
+</li>
+<li><p><em>Predicción de retornos esperados para una compañía:</em></p>
+<p>Se emplean modelos de regresión.</p>
+</li>
+</ul>
+</section>
+<section id="tipos-de-sistemas">
+<h2>Tipos de sistemas<a class="headerlink" href="#tipos-de-sistemas" title="Permalink to this heading">#</a></h2>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="info admonition">
+<p class="admonition-title">Target <em>vs</em> Label</p>
+<p>En el contexto del <em>aprendizaje supervisado</em>, se suele emplear <strong>target</strong> en el caso de <em>regresión</em>, y <strong>label</strong> para los problemas de clasificación.</p>
+</div>
+</aside>
+<p>Podemos clasificar los sistemas entres grandes categorías basándonos en los siguientes criterios:</p>
+<ol class="arabic simple">
+<li><p>Cómo son <em>supervisados</em> durante el entrenamiento:</p>
+<ul class="simple">
+<li><p><strong>Supervisado:</strong> se da la etiqueta del resultado deseado (numéricas para tareas de regresión, ordinales o no ordinales en el caso de regresión).</p></li>
+<li><p><strong>No supervisado:</strong> los sistemas aprenden sin etiquetas; se emplean para tareas de <em>clustering</em>, <em>reducción de dimensiones</em>, <em>visualización</em>, <em>detección de anomalías</em>, <em>detección de novedad</em>, <em>reglas de asociación</em>.</p></li>
+<li><p><strong>Semi-supervisado:</strong> sólo se tiene etiquetada una parte del conjunto de datos; por ejemplo, cuando Google Photos nos pregunta quienes son las personas que aparecen en nuestras fotos, los algoritmos son capaces de predecir la presencia de esas mismas personas en el resto de la galería, es decir, hay una propagación de etiquetas.</p></li>
+<li><p><strong>Auto-supervisado:</strong> genera un conjunto de datos completamente etiquetado a partir de uno que no lo está; un ejemplo de esto son los modelos de reconstrucción de imágenes.</p></li>
+<li><p><strong>Aprendizaje por refuerzo:</strong> un <em>agente</em> explora un <em>ambiente</em>, experimenta y obtiene una <em>recompensa en función de las acciones que siga</em>; a partir de lo anterior, el agente es capaz de crear una <em>política</em> que le permite tomar las mejores acciones dependiendo de cada situación.</p></li>
+</ul>
+</li>
+</ol>
+<figure class="align-default" id="gatito">
+<a class="reference internal image-reference" href="_images/mls3_0112.png"><img alt="_images/mls3_0112.png" src="_images/mls3_0112.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Ejemplo de aprendizaje auto-supervisado para completar imágenes.</span><a class="headerlink" href="#gatito" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Cuando se tienen conjuntos de datos muy grandes y deben ser entrenados, muy probablemente los datos no quepan en memoria, emplear <em>online learning</em> puede ayudar a manejar la situación. Simplemente se divide el conjunto de datos en partes más pequeñas (mini-batches) para entrenar el modelo parcialmente. Esta ténica se conoce como <strong>out-of-core learning</strong>.</p>
+</div>
+</aside>
+<ol class="arabic simple" start="2">
+<li><p>Cómo son <em>entrenados</em> los modelos:</p>
+<ul class="simple">
+<li><p><strong>Batch learning:</strong> tiene un <em>aprendizaje no incremental</em> (usualmente llamado <em>offline learning</em>) ya que requiere el conjunto de datos en su totalidad para ser entrenado <em>todo de un tirón</em>, en una <em>época</em>; una vez entrenado, no se puede reentrenar si llegara una <em>instancia</em> nueva.</p></li>
+<li><p><strong>Online learning:</strong> son sistemas que aprenden de <em>forma incremental</em> o en grupos de datos pequeños llamados <em>mini-batches</em>; estos modelos pueden ser reentrenados en caso de que llegue una nueva instancia.</p></li>
+</ul>
+</li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Los modelos entrenados mediante <em>batch learning</em> no son viables en computadoras o servidores con escasos recursos.</p>
+</div>
+<ol class="arabic" start="3">
+<li><p>Cómo se hacen las generalizaciones:</p>
+<ul class="simple">
+<li><p><strong>Basadas en instancia:</strong> emplea medidas de similitud entre instancias; la similitud se puede medir, por ejemplo, utilizando la <em>similitud conseno</em></p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-sim-cos">
+<span class="eqno">(1)<a class="headerlink" href="#equation-sim-cos" title="Permalink to this equation">#</a></span>\[sim(i, j) = \cos(\hat{i}, \hat{j}) = \frac{\hat{i} \cdot \hat{j}}{||\hat{i}||_2 * ||\hat{j}||_2}\]</div>
+<p>Esto significa que cuando se tienen dos instancias de nuestro conjunto de datos, y el ángulo entre ellas es pequeño, entonces tienen gran similitud; si el ángulo formado es mayor, se tiene una similitud menor. En esencia, los modelos <em>basados en instancias</em> hacen comparaciones con el resto de registros en el conjunto de datos</p>
+<ul class="simple">
+<li><p><strong>Basadas en modelos:</strong> se emplean modelos matemáticos que se ajustan durante el entrenamiento; por el ejemplo, el ajuste de los parámetros <span class="math notranslate nohighlight">\(\theta _i\)</span>, <span class="math notranslate nohighlight">\(i \in \{ 1, 2 \}\)</span> en el modelo de regresión lineal simple</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-lin-reg-simple">
+<span class="eqno">(2)<a class="headerlink" href="#equation-lin-reg-simple" title="Permalink to this equation">#</a></span>\[y = \theta _0 + \theta _1 x\]</div>
+<p>Las elecciones tomadas por el algortimo serán con base en el modelo entrenado, no tomando como referencia el resto de instancias.</p>
+</li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Notas ~ Machine Learning</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones">Aplicaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-sistemas">Tipos de sistemas</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fernando Santa Rita Vizuet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

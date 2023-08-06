@@ -8,3 +8,4 @@ parts:
   # numbered: true
   chapters:
   - file: 1_introduccion
+  - file: 2_project

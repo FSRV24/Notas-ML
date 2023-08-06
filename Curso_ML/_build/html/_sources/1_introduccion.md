@@ -92,3 +92,25 @@ Los modelos entrenados mediante *batch learning* no son viables en computadoras 
     ```
 
     Las elecciones tomadas por el algortimo serán con base en el modelo entrenado, no tomando como referencia el resto de instancias.
+
+## Evaluación de modelos
+
+Comúnmente, se suele llevar a cabo una partición del conjunto de datos original, cada conjunto llamado: **train**, **test** y **validation**. Bajo el contexto de la **validación cruzada**, entendemos estos conjuntos de la siguiente forma:
+
+1. Tenemos el conjunto de datos original con $n$ instancias.
+2. Hacemos la primera partición entre el conjunto **train** y **validation**, donde este último sólo se utiliza en la evaluación final de un modelo.
+3. Establecemos un número $k$ de iteraciones o *folds*, número de veces que pondremos a prueba el modelo candidato.
+4. Dividimos el modelo en $k$ particiones, cada una de ellas será el conjunto **test** de cada iteración.
+
+Al final se obtienen $k$ evaluaciones del modelo propuesto entrenado sobre todo el conjunto *train*, así que se evitan sesgos.
+
+```{figure} images/cv.png
+:height: 200px
+:name: cross-val
+
+Proceso en validación cruzada. Obtenido de [ResearchGate](https://www.researchgate.net/profile/Mingchao-Li/publication/331209203/figure/fig2/AS:728070977748994@1550597056956/K-fold-cross-validation-method.png).
+```
+
+```{important}
+No existe una tasa adecuada entre el conjunto de entrenamiento y prueba, siendo común utilizar una tasa del 80% para entrenamiento y 20% para prueba. El procentaje del conjunto de prueba suele se mayor en *datasets* más pequeños, o más pequeño en *datasets* más grandes.
+```

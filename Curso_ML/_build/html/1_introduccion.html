@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '1_introduccion';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Proyecto end-to-end" href="2_project.html" />
     <link rel="prev" title="Notas ~ Machine Learning" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -160,6 +161,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. Conceptos básicos</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Conceptos básicos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_project.html">Proyecto end-to-end</a></li>
 </ul>
 
     </div>
@@ -355,6 +357,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones">Aplicaciones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-sistemas">Tipos de sistemas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-modelos">Evaluación de modelos</a></li>
 </ul>
             </nav>
         </div>
@@ -472,6 +475,27 @@ document.write(`
 </li>
 </ol>
 </section>
+<section id="evaluacion-de-modelos">
+<h2>Evaluación de modelos<a class="headerlink" href="#evaluacion-de-modelos" title="Permalink to this heading">#</a></h2>
+<p>Comúnmente, se suele llevar a cabo una partición del conjunto de datos original, cada conjunto llamado: <strong>train</strong>, <strong>test</strong> y <strong>validation</strong>. Bajo el contexto de la <strong>validación cruzada</strong>, entendemos estos conjuntos de la siguiente forma:</p>
+<ol class="arabic simple">
+<li><p>Tenemos el conjunto de datos original con <span class="math notranslate nohighlight">\(n\)</span> instancias.</p></li>
+<li><p>Hacemos la primera partición entre el conjunto <strong>train</strong> y <strong>validation</strong>, donde este último sólo se utiliza en la evaluación final de un modelo.</p></li>
+<li><p>Establecemos un número <span class="math notranslate nohighlight">\(k\)</span> de iteraciones o <em>folds</em>, número de veces que pondremos a prueba el modelo candidato.</p></li>
+<li><p>Dividimos el modelo en <span class="math notranslate nohighlight">\(k\)</span> particiones, cada una de ellas será el conjunto <strong>test</strong> de cada iteración.</p></li>
+</ol>
+<p>Al final se obtienen <span class="math notranslate nohighlight">\(k\)</span> evaluaciones del modelo propuesto entrenado sobre todo el conjunto <em>train</em>, así que se evitan sesgos.</p>
+<figure class="align-default" id="cross-val">
+<a class="reference internal image-reference" href="_images/cv.png"><img alt="_images/cv.png" src="_images/cv.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Proceso en validación cruzada. Obtenido de <a class="reference external" href="https://www.researchgate.net/profile/Mingchao-Li/publication/331209203/figure/fig2/AS:728070977748994&#64;1550597056956/K-fold-cross-validation-method.png">ResearchGate</a>.</span><a class="headerlink" href="#cross-val" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>No existe una tasa adecuada entre el conjunto de entrenamiento y prueba, siendo común utilizar una tasa del 80% para entrenamiento y 20% para prueba. El procentaje del conjunto de prueba suele se mayor en <em>datasets</em> más pequeños, o más pequeño en <em>datasets</em> más grandes.</p>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -514,6 +538,15 @@ document.write(`
         <p class="prev-next-title">Notas ~ Machine Learning</p>
       </div>
     </a>
+    <a class="right-next"
+       href="2_project.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Proyecto end-to-end</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -534,6 +567,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones">Aplicaciones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-sistemas">Tipos de sistemas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-modelos">Evaluación de modelos</a></li>
 </ul>
   </nav></div>
 

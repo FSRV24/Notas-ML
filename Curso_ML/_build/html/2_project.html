@@ -355,6 +355,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizaciones-con-plotly">Visualizaciones con Plotly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primeros-pasos">Primeros pasos</a></li>
 </ul>
             </nav>
         </div>
@@ -371,7 +372,7 @@ document.write(`
 <p>Emplearemos el conjunto de datos <a class="reference external" href="https://www.kaggle.com/datasets/camnugent/california-housing-prices">California Housing Prices</a> como base da datos de ejemplo que permitirá la ejemplificación de las herramientas utilizadas.</p>
 <section id="visualizaciones-con-plotly">
 <h2>Visualizaciones con Plotly<a class="headerlink" href="#visualizaciones-con-plotly" title="Permalink to this heading">#</a></h2>
-<p>Plotly funciona instanciando un objeto al que usualmente llamaremos <code class="docutils literal notranslate"><span class="pre">fig</span> <span class="pre">=</span> <span class="pre">go.Figure()</span></code> al cuál podemos agregar trazos y actualizar ciertas configuraciones a través de sus métodos.</p>
+<p>Plotly funciona instanciando un objeto <code class="docutils literal notranslate"><span class="pre">fig</span> <span class="pre">=</span> <span class="pre">go.Figure()</span></code> al cuál podemos agregar trazos y actualizar ciertas configuraciones a través de sus métodos.</p>
 <p>Generalmente, utilizaremos la siguiente configuración:</p>
 <div class="info dropdown admonition">
 <p class="admonition-title">Code</p>
@@ -406,10 +407,10 @@ document.write(`
 </div>
 </div>
 <p>Resultado.</p>
-<figure class="align-default" id="directive-fig">
+<figure class="align-default" id="cuadratica">
 <a class="reference internal image-reference" href="_images/cuadratic.svg"><img alt="_images/cuadratic.svg" height="400px" src="_images/cuadratic.svg" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Función cuadrática con ruido blanco <span class="math notranslate nohighlight">\(y=x^2 + \varepsilon\)</span>.</span><a class="headerlink" href="#directive-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Función cuadrática con ruido blanco <span class="math notranslate nohighlight">\(y=x^2 + \varepsilon\)</span>.</span><a class="headerlink" href="#cuadratica" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Podemos agregar otros trazos sobre la misma figura.</p>
@@ -428,12 +429,128 @@ document.write(`
 </div>
 </div>
 <p>Resultado.</p>
-<figure class="align-default" id="id1">
+<figure class="align-default" id="cuadratica-tendencia">
 <a class="reference internal image-reference" href="_images/cuadratic_2.svg"><img alt="_images/cuadratic_2.svg" height="400px" src="_images/cuadratic_2.svg" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Agrando línea de tendencia.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Agregando línea de tendencia.</span><a class="headerlink" href="#cuadratica-tendencia" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Podemos <strong>guardar gráficos</strong> en distintos formatos mediante el comando <code class="docutils literal notranslate"><span class="pre">fig.write_figure('name.format')</span></code>. En el caso de guardar directamente las gráficas interactivas, se tiene la opción <code class="docutils literal notranslate"><span class="pre">fig.write_html('name.html')</span></code>.</p>
+</div>
+</section>
+<section id="primeros-pasos">
+<h2>Primeros pasos<a class="headerlink" href="#primeros-pasos" title="Permalink to this heading">#</a></h2>
+<p>Al comenzar un proyecto es útil utilizar visualizaciones como apoyo para conocer la naturaleza del conjunto de datos. En el caso de tener datos geográficos, podemos hacer <strong>mapas interactivos</strong> controlando el color y tamaño de cada instancia en función, por ejemplo, de la variable objetivo (<code class="docutils literal notranslate"><span class="pre">median_house_value</span></code>) u otra variable de interés.</p>
+<div class="info dropdown admonition">
+<p class="admonition-title">Code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scattergeo</span><span class="p">(</span>
+    <span class="n">lon</span><span class="o">=</span><span class="n">df_sample</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">],</span>
+    <span class="n">lat</span><span class="o">=</span><span class="n">df_sample</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">],</span>
+    <span class="n">marker_colorbar_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">marker_colorscale</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span>
+    <span class="n">marker_size</span><span class="o">=</span><span class="n">df_sample</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">30_000</span><span class="p">,</span>
+    <span class="n">marker_color</span><span class="o">=</span><span class="n">df_sample</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">],</span>
+    <span class="n">text</span><span class="o">=</span><span class="n">df_sample</span><span class="p">[</span><span class="s1">&#39;ocean_proximity&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;br&gt;&#39;</span> <span class="o">+</span> <span class="s1">&#39;Median house value: &#39;</span> <span class="o">+</span> <span class="n">df_sample</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Valor medio de las casas por vecindario&#39;</span><span class="p">,</span>
+    <span class="n">geo_scope</span><span class="o">=</span><span class="s1">&#39;usa&#39;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span>
+    <span class="n">template</span><span class="o">=</span><span class="s1">&#39;ggplot2&#39;</span><span class="p">,</span>
+    <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_geos</span><span class="p">(</span><span class="n">fitbounds</span><span class="o">=</span><span class="s1">&#39;locations&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Resultado.</p>
+<figure class="align-default" id="mapa">
+<a class="reference internal image-reference" href="_images/mapa.svg"><img alt="_images/mapa.svg" height="500px" src="_images/mapa.svg" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Mapa con colores y tamaño en función de la variable objetivo.</span><a class="headerlink" href="#mapa" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Las gráficas <strong>gráficas de coordenadas paralelas</strong> también resultan útiles para determinar tendencias entre variables. De nuevo, empleando la variable objetivo, se tiene lo siguiente.</p>
+<div class="info dropdown admonition">
+<p class="admonition-title">Code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">parallel_coordinates</span><span class="p">(</span>
+    <span class="n">df_sample</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span>
+    <span class="n">dimensions</span><span class="o">=</span><span class="n">df_sample</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+    <span class="n">color_continuous_scale</span><span class="o">=</span><span class="n">px</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">diverging</span><span class="o">.</span><span class="n">Tealrose</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">template</span><span class="o">=</span><span class="s1">&#39;ggplot2&#39;</span><span class="p">,</span>
+    <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Resultado.</p>
+<figure class="align-default" id="paralelas">
+<a class="reference internal image-reference" href="_images/paralelas.svg"><img alt="_images/paralelas.svg" height="400px" src="_images/paralelas.svg" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Comparación de atributos tomando como referencia la variable objetivo.</span><a class="headerlink" href="#paralelas" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Claramente se observan separaciones en puntos específicos de la <em>latitud</em> y <em>longitud</em>, lo cuál es confirmado a través del mapa anterior; los <em>ingresos medios</em> (<code class="docutils literal notranslate"><span class="pre">median_income</span></code>) parecen tener una buena correlación. El resto de variables no muestran buenas separaciones, aunque quizá exista otro tipo de relaciones más complejas entre variables.</p>
+<p>También es importante determinar la forma de las <strong>distribuciones</strong>, es decir, determinar el nivel de <em>kurtosis</em> y <em>skewness</em> (sesgo), por lo que es ideal hacer las gráficas de cada una de las variables.</p>
+<div class="info dropdown admonition">
+<p class="admonition-title">Code</p>
+<p>Para determinar el tamaño de los bins en cada histograma conviene tomar un tamaño estándar primero, luego, con base en las observaciones, mover a mano cada uno de los bins de forma manual dependiendo de cada una de las escalas.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bin_size</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df_numeric</span><span class="p">):</span>
+    <span class="n">hist_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">df_sample</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="n">col</span><span class="p">]]</span>
+    <span class="n">group_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="p">]</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">create_distplot</span><span class="p">(</span>
+        <span class="n">hist_data</span><span class="p">,</span>
+        <span class="n">group_labels</span><span class="p">,</span>
+        <span class="n">show_rug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="n">palette</span><span class="p">[</span><span class="n">idx</span><span class="p">]],</span>
+        <span class="n">bin_size</span><span class="o">=</span><span class="n">bin_size</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Distribución de &lt;b&gt;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Item&#39;</span><span class="p">,</span>
+        <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Frecuencia relativa&#39;</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span>
+        <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">template</span><span class="o">=</span><span class="s1">&#39;plotly_white&#39;</span><span class="p">,</span>
+        <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">renderer</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Resultado.</p>
+<figure class="align-default" id="hist">
+<a class="reference internal image-reference" href="_images/hist.svg"><img alt="_images/hist.svg" height="400px" src="_images/hist.svg" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Histograma con <em>función de densidad ajustada</em> (KDE).</span><a class="headerlink" href="#hist" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Es importante tener en cuenta que cuando sesgadas o con cierto nivel de kurtosis, los algoritmos de machine learning no tendrán el mejor comportamiento. Por ello, estudiaremos algunas estrategias para hacer correcciones y estas tomen una forma más <em>“normal”</em>.</p>
 </section>
 </section>
 
@@ -496,6 +613,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizaciones-con-plotly">Visualizaciones con Plotly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primeros-pasos">Primeros pasos</a></li>
 </ul>
   </nav></div>
 
